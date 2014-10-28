@@ -22,7 +22,7 @@ var generateFrames = function(numLEDs,numFrames) {
 	];
 
 
-	var numWaves = 10;
+	var numWaves = 40;
 	var waveFrames = 100;
 	var waveLength = 10;
 	var waveWidth = 4;
