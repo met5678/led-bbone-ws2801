@@ -4,8 +4,9 @@
   "description": "",
   "main": "ledspi.js",
   "dependencies": {
-    "spi": "~0.1.2",
-    "color": "~0.7.3"
+    "color": "~0.7.3",
+    "easing": "0.0.4",
+    "spi": "~0.1.2"
   },
   "devDependencies": {},
   "scripts": {
