@@ -1,13 +1,11 @@
 try {
-	var SPI = require('spi');
-	var spi = new SPI.Spi('/dev/spidev1.0');
-
-	spi.maxSpeed(1000000);
-	spi.open();
+	var SPI = require("pi-spi");
+	var spi = SPI.initialize("/dev/spidev0.0");
+	spi.clockSpeed(1e6);
 } catch(e) {
 	var spi = {
 		write:function(){}
-	};	
+	};
 }
 
 var numLEDs = !!process.argv[3] ? Number(process.argv[3]) : 20;
