@@ -16,6 +16,7 @@ else {
 
 var numLEDs = !!process.argv[3] ? Number(process.argv[3]) : 20;
 var effect = !!process.argv[2] ? process.argv[2] : 'none';
+var msPerFrame = !!process.argv[5] ? Number(process.argv[4]) : 16;
 
 var numFrames = 840;
 var frameGenerator = require('./'+effect);
@@ -47,4 +48,4 @@ var doFrame = function() {
 	curFrame = curFrame >= numFrames-1 ? 0 : curFrame+1;
 }
 
-myInterval = setInterval(doFrame,500);
+myInterval = setInterval(doFrame,msPerFrame);
