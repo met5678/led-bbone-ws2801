@@ -34,13 +34,14 @@ var generateFrames = function(numLEDs,numFrames) {
 		var endLED = Math.ceil(loc+width/2);
 
 		for(var curLED=startLED; curLED <= endLED; curLED++) {
-			var ledColor = Color().rgb(frame[curLED%numLEDs]);
+			var normLED = curLED < 0 ? numLEDs+curLED : curLED%numLEDs;
+			var ledColor = Color().rgb(frame[normLED]);
 			var dist = Math.abs(loc-curLED)*2/width;
 			var val = Math.floor(Math.pow(1-dist,2)*100);
 			waveColor.value(val*val);
+			console.log(curLED,normLED,val,dist);
 			ledColor.mix(waveColor);
-			frame[curLED] = ledColor.rgbArray();
-			console.log(curLED,val,dist);
+			frame[normLED] = ledColor.rgbArray();
 		}
 	};
 
