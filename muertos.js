@@ -28,13 +28,16 @@ var initFrames = function(numLEDs) {
 	];
 
 	for(var frame=0; frame<numFrames; frame++) {
+		frames[frame] = [];
 		for(var led=0; led<numLEDs; led++) {
 			frames[frame][led] = colors[a%colors.length].rgbArray();
 		}
 	}
+
+	console.log(frames[0]);
 };
 
-initFrames();
+initFrames(numLEDs);
 
 var convertToBuffers = function() {
 	for(var frame=0; frame<numFrames; frame++) {
