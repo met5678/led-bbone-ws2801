@@ -50,4 +50,4 @@ var doFrame = function() {
 	curFrame = curFrame >= numFrames-1 ? 0 : curFrame+1;
 }
 
-myInterval = setInterval(doFrame,10);
+myInterval = setInterval(doFrame,16);
