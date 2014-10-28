@@ -1,6 +1,8 @@
 var Color = require('color');
 
 var generateFrames = function(numLEDs,numFrames) {
+	var frames = [];
+
 	var colors = [
 		Color().hsv(0,0,100),
 		Color().hsv(0,0,100),
@@ -14,14 +16,14 @@ var generateFrames = function(numLEDs,numFrames) {
 		Color().hsv(260,100,100)
 	];
 
-
-
 	for(var frame=0; frame<numFrames; frame++) {
 		frames[frame] = [];
 		for(var led=0; led<numLEDs; led++) {
 			frames[frame][led] = colors[led%colors.length].rgbArray();
 		}
 	}
+
+	return frames;
 };
 
 module.exports = {
