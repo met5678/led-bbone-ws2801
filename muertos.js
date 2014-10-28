@@ -1,6 +1,6 @@
 var Color = require('color');
 
-var generateFrames = function(numLEDs) {
+var generateFrames = function(numLEDs,numFrames) {
 	var colors = [
 		Color().hsv(0,0,100),
 		Color().hsv(0,0,100),
