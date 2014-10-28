@@ -22,10 +22,10 @@ var generateFrames = function(numLEDs,numFrames) {
 	];
 
 
-	var numWaves = 40;
-	var waveFrames = 100;
-	var waveLength = 10;
-	var waveWidth = 4;
+	var numWaves = 20;
+	var waveFrames = 150;
+	var waveLength = 4;
+	var waveWidth = 6;
 
 	var easings = Easing(100,'circular',{endToEnd:true});
 
