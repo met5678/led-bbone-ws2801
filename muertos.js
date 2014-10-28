@@ -30,13 +30,15 @@ var generateFrames = function(numLEDs,numFrames) {
 	var waveWidth = 4;
 
 	var drawPoint = function(frame,loc,color,width) {
-		var startLED = Math.floor(loc-width/2);
-		var endLED = Math.ceil(loc+width/2);
+		var startLED = Math.floor(loc-(width/2));
+		var endLED = Math.ceil(loc+(width/2));
 
 		for(var curLED=startLED; curLED <= endLED; curLED++) {
 			var normLED = curLED < 0 ? numLEDs+curLED : curLED%numLEDs;
 			var ledColor = Color().rgb(frame[normLED]);
-			var dist = Math.abs(loc-curLED)*2/width;
+			var dist = (Math.abs(loc-curLED)*2)/width;
+			if(dist > 1) dist=1;
+			if(dist < 0) dist=0;
 			var val = Math.floor(Math.pow(1-dist,2)*100);
 			waveColor.value(val*val);
 			console.log(curLED,normLED,val,dist);
