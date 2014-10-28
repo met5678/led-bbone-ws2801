@@ -21,16 +21,16 @@ var initFrames = function(numLEDs) {
 	var colors = [
 		Color().hsv(0,0,100),
 		Color().hsv(0,100,100),
-		Color().hsv(35,100,100),
-		Color().hsv(60,100,100),
-		Color().hsv(0,60,100),
-		Color().hsv(300,100,100)
+		Color().hsv(25,100,100),
+		Color().hsv(50,100,100),
+		Color().hsv(340,80,100),
+		Color().hsv(270,100,100)
 	];
 
 	for(var frame=0; frame<numFrames; frame++) {
 		frames[frame] = [];
 		for(var led=0; led<numLEDs; led++) {
-			frames[frame][led] = colors[a%colors.length].rgbArray();
+			frames[frame][led] = colors[led%colors.length].rgbArray();
 		}
 	}
 
