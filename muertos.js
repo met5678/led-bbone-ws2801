@@ -36,13 +36,15 @@ var generateFrames = function(numLEDs,numFrames) {
 		for(var curLED=startLED; curLED <= endLED; curLED++) {
 			var normLED = curLED < 0 ? numLEDs+curLED : curLED%numLEDs;
 			var ledColor = Color().rgb(frame[normLED]);
+
 			var dist = (Math.abs(loc-curLED)*2)/width;
 			if(dist > 1) dist=1;
 			if(dist < 0) dist=0;
 			var val = Math.floor(Math.pow(1-dist,2)*100);
 			waveColor.value(val*val);
-			console.log(curLED,normLED,val,dist);
+
 			ledColor.mix(waveColor);
+
 			frame[normLED] = ledColor.rgbArray();
 		}
 	};
@@ -58,20 +60,22 @@ var generateFrames = function(numLEDs,numFrames) {
 
 		var waveColor = colors[Math.floor(Math.random()*colors.length)].clone();
 
-		console.log(startLED,startFrameIndex,moveAmount,waveColor);
 
 
 		for(var waveFrameIndex=0; waveFrameIndex<waveFrames; waveFrameIndex++) {
 			var realFrameIndex = (waveFrameIndex+startFrameIndex)%numFrames;
 
-			var curCenter = startLED + waveFrameIndex*moveAmount;
+			if(direction)
+				var curCenter = startLED + waveFrameIndex*moveAmount;
+			else
+				var curCenter = startLED - waveFrameIndex*moveAmount;
 			waveColor.value(easings[waveFrameIndex]*100);
 
 			drawPoint(frames[realFrameIndex],curCenter,waveColor,waveWidth);
 		}
-	}
 
-	console.log(frames[100]);
+		console.log("Finished wave " + wave);
+	}
 
 	return frames;
 };
