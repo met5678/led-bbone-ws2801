@@ -1,11 +1,18 @@
-var SPI = require('spi');
-var spi = new SPI.Spi('/dev/spidev1.0');
-var Color = require('color');
+try {
+	var SPI = require('spi');
+} catch(e) {}
 
-spi.maxSpeed(1000000);
-spi.open();
+if(!!SPI) {
+	var spi = new SPI.Spi('/dev/spidev1.0');
 
-process.argv;
+	spi.maxSpeed(1000000);
+	spi.open();
+}
+else {
+	var spi = {
+		write:function(){}
+	};
+}
 
 var numLEDs = !!process.argv[3] ? process.argv[3] : 20;
 var effect = !!process.argv[2] ? process.argv[2] : 'none';
