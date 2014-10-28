@@ -35,9 +35,11 @@ convertToBuffers();
 
 var curFrame = 0;
 
+function noop() {};
+
 var doFrame = function() {
 	var buf = frames[curFrame];
-	spi.write(buf);
+	spi.write(buf,noop);
 
 	curFrame = curFrame >= numFrames-1 ? 0 : curFrame+1;
 }
