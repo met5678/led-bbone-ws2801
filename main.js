@@ -5,21 +5,13 @@ var Color = require('color');
 spi.maxSpeed(1000000);
 spi.open();
 
-var numLEDs = 80;
+process.argv;
+
+var numLEDs = !!process.argv[4] ? process.argv[4] : 20;
+var effect = !!process.argv[3] ? process.argv[3] : 'none';
+
 var numFrames = 840;
-
-var frames = [];
-
-for(var frame=0; frame<numFrames; frame++) {
-	frames[frame] = [];
-	for(var led=0; led<numLEDs; led++) {
-		frames[frame][led] = {h:0,s:0,v:0};
-	}
-}
-
-console.log(process.argv);
-
-var frameGenerator = require('./muertos');
+var frameGenerator = require('./'+effect);
 
 frames = frameGenerator.generateFrames(numLEDs,numFrames);
 
