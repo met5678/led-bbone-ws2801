@@ -7,8 +7,8 @@ spi.open();
 
 process.argv;
 
-var numLEDs = !!process.argv[4] ? process.argv[4] : 20;
-var effect = !!process.argv[3] ? process.argv[3] : 'none';
+var numLEDs = !!process.argv[3] ? process.argv[4] : 20;
+var effect = !!process.argv[2] ? process.argv[3] : 'none';
 
 var numFrames = 840;
 var frameGenerator = require('./'+effect);
