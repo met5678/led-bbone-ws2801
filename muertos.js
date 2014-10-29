@@ -22,10 +22,10 @@ var generateFrames = function(numLEDs,numFrames) {
 	];
 
 
-	var numWaves = 20;
-	var waveFrames = 100;
-	var waveLength = 10;
-	var waveWidth = 10;
+	var numWaves = 90;
+	var waveFrames = 220;
+	var waveLength = 15;
+	var waveWidth = 4;
 
 	var easings = Easing(waveFrames,'circular',{endToEnd:true});
 
@@ -44,7 +44,7 @@ var generateFrames = function(numLEDs,numFrames) {
 
 			calcColor.darken(easings[Math.floor(dist*waveFrames/2)]);
 
-			ledColor.mix(calcColor,value);
+			ledColor.mix(calcColor);
 
 			/*if(ledColor.rgbArray[0] != 0)
 				console.log(ledColor.rgbArray(),calcColor.rgbArray(),value);
@@ -71,7 +71,7 @@ var generateFrames = function(numLEDs,numFrames) {
 			else
 				var curCenter = startLED - waveFrameIndex*moveAmount;
 
-			var value = easings[waveFrameIndex];
+			var value = 1-easings[waveFrames-waveFrameIndex];
 
 			drawPoint(frames[realFrameIndex],curCenter,waveWidth,waveColor,value);
 		}

@@ -15,9 +15,15 @@ var effect = !!process.argv[2] ? process.argv[2] : 'none';
 var msPerFrame = !!process.argv[5] ? Number(process.argv[4]) : 16;
 
 var numFrames = 840;
-var frameGenerator = require('./'+effect);
 
-frames = frameGenerator.generateFrames(numLEDs,numFrames);
+if(~effect.indexOf('.json')) {
+	var frames = require('./generated/'+effect);
+	numLEDs = frames[0].length;
+}
+else {
+	var frameGenerator = require('./'+effect);
+	frames = frameGenerator.generateFrames(numLEDs,numFrames);
+}
 
 var convertToBuffers = function() {
 	for(var frame=0; frame<numFrames; frame++) {
