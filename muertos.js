@@ -11,10 +11,10 @@ var generateFrames = function(numLEDs,numFrames) {
 	}
 
 	var colors = [
-		Color().hsv(0,0,100),
-		Color().hsv(0,0,100),
-		Color().hsv(0,0,100),
-		Color().hsv(0,0,100),
+		Color().hsv(0,0,60),
+		Color().hsv(0,0,60),
+		Color().hsv(0,0,60),
+		Color().hsv(0,0,60),
 		Color().hsv(0,100,100),
 		Color().hsv(25,100,100),
 		Color().hsv(50,100,100),
@@ -22,29 +22,29 @@ var generateFrames = function(numLEDs,numFrames) {
 	];
 
 
-	var numWaves = 90;
-	var waveFrames = 220;
-	var waveLength = 15;
-	var waveWidth = 4;
+	var numWaves = 100;
+	var waveFrames = 200;
+	var waveLength = 10;
+	var waveWidth = 5;
 
-	var easings = Easing(waveFrames,'circular',{endToEnd:true});
+	var easings = Easing(waveFrames,'sinusoidal',{endToEnd:true});
 
 	var drawPoint = function(frame,loc,width,color,value) {
 		var startLED = Math.floor(loc-(width/2));
 		var endLED = Math.ceil(loc+(width/2));
 
 		for(var curLED=startLED; curLED <= endLED; curLED++) {
-			var calcColor = color.clone().value(value*100);
+			var calcColor = color.clone().value(Math.floor(value*100));
 			var normLED = curLED < 0 ? numLEDs+curLED : curLED%numLEDs;
 			var ledColor = Color().rgb(frame[normLED]);
 
-			var dist = (Math.abs(loc-curLED)*2)/width;
+			var dist = Math.abs(loc-curLED) / (width/2);
 			if(dist > 1) dist=1;
-			if(dist < 0) dist=0;
 
-			calcColor.darken(easings[Math.floor(dist*waveFrames/2)]);
+			var darkenAmount = Math.pow(dist,.75);
+			calcColor.darken(darkenAmount);
 
-			ledColor.mix(calcColor);
+			ledColor.mix(calcColor, value * (1-darkenAmount));
 
 			/*if(ledColor.rgbArray[0] != 0)
 				console.log(ledColor.rgbArray(),calcColor.rgbArray(),value);
@@ -58,7 +58,6 @@ var generateFrames = function(numLEDs,numFrames) {
 		var startLED = Math.floor(Math.random()*numLEDs);
 		var startFrameIndex = Math.floor(Math.random()*numFrames);
 
-
 		var moveAmount = waveLength/waveFrames;
 
 		var waveColor = colors[Math.floor(Math.random()*colors.length)].clone();
@@ -71,7 +70,7 @@ var generateFrames = function(numLEDs,numFrames) {
 			else
 				var curCenter = startLED - waveFrameIndex*moveAmount;
 
-			var value = 1-easings[waveFrames-waveFrameIndex];
+			var value = easings[waveFrameIndex];
 
 			drawPoint(frames[realFrameIndex],curCenter,waveWidth,waveColor,value);
 		}
